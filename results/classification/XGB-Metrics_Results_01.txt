@@ -1,0 +1,16 @@
+-------------------------------------------------------
+MODEL EVALUATION SUMMARY - XGBoost Classifier - v01
+-------------------------------------------------------
+Accuracy:  0.000
+Precision: 0.000
+Recall:    0.000
+F1-Score:  0.000
+-------------------------------------------------------
+INTERPRETATION - XGBoost Classifier - v01
+-------------------------------------------------------
+  • Model correctly identifies 0.0% of cases
+  • When predicting IOC, correct 0.0% of the time
+  • Catches 0.0% of actual IOC events (sensitivity)
+  • Overall balance: F1-Score = 0.000
+-------------------------------------------------------
+
