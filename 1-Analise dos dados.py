@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Make pandas display all columns
-pd.set_option('display.max_columns', None)
+pd.set_option('display.max_columns', 0)
 
 # Load the dataset
 # data = pd.read_csv('input_final4.csv', header=0)
@@ -33,6 +33,14 @@ print(data)
 # Summary statistics
 print(data.describe())
 
+# Round Tx_Mod, Tx_Obs, P90cl_Tx_Mod, P90cl_Tx_Obs to 5 decimal places
+# Because they Tx_Mod and Tx_Obs have 5 decimal places and they are compared with P90cl_Tx_Mod and P90cl_Tx_Obs
+# so they should have the same number of decimal places for better comparison and to avoid issues with floating point precision
+data['Tx_Mod'] = data['Tx_Mod'].round(5)
+data['Tx_Obs'] = data['Tx_Obs'].round(5)
+data['P90cl_Tx_Mod'] = data['P90cl_Tx_Mod'].round(5)
+data['P90cl_Tx_Obs'] = data['P90cl_Tx_Obs'].round(5)
+
 # Recalculate dia_prev and sem_prev columns
 data.drop(columns=['dia_prev'], errors='ignore', inplace=True)
 data.drop(columns=['sem_prev'], errors='ignore', inplace=True)
@@ -50,10 +58,6 @@ print(data.sort_values(by='dia_prev'))
 
 # Check for missing values
 print(data.isnull().sum())
-
-# Using the column IOC_Obs, check if the dataset is balanced: 361 x 22
-print(data['OC_Obs_Candid'].value_counts())
-print(data['OC_Mod_Candid'].value_counts())
 
 # Check the distribution of the dia_prev column, sort it by dia_prev values and show as horizontal table
 print(data['dia_prev'].value_counts().sort_index().to_frame().T)
@@ -78,14 +82,12 @@ data.drop(columns=['OC_Obs_Candid'], errors='ignore', inplace=True)
 data.insert(data.columns.get_loc('IOC_Obs'), 'OC_Obs_Candid',
             (data['Tx_Obs'] >= data['P90cl_Tx_Obs']).astype(int))
 
+# Using the column IOC_Obs, check if the dataset is balanced: 361 x 22
+print(data['OC_Obs_Candid'].value_counts())
+print(data['OC_Mod_Candid'].value_counts())
+
 # Sort data by data_rod and data_prev
 data.sort_values(by=['data_rod', 'data_prev'], inplace=True)
-
-# Create a dataset with rows iot check IOC_Obs candidates
-data2 = data[['data_prev', 'Tx_Mod', 'P90cl_Tx_Mod', 'Tx_Obs', 'P90cl_Tx_Obs', 'OC_Mod_Candid',
-              "IOC_Mod", 'OC_Obs_Candid', "IOC_Obs"]]
-# Save as CSV
-data2.to_csv('1.0-DATA_OC_CANDIDATES.csv', index=False)
 
 # Save the "ORIGINAL' dataset to CSV
 data.to_csv('1.1-DATA_ORIGINAL-FULL.csv', index=False)
@@ -94,13 +96,11 @@ data.to_csv('1.1-DATA_ORIGINAL-FULL.csv', index=False)
 # and training (the rest of data_prev)
 test_mask = (data['data_prev'] >= 20231111) & (
     data['data_prev'] <= 20231119)
-data_train = data[~test_mask]
-data_test = data[test_mask]
+data_train = data[~test_mask][['data_prev', 'Tx_Mod', 'P90cl_Tx_Mod', 'Tx_Obs',
+                               'P90cl_Tx_Obs', 'OC_Mod_Candid', "IOC_Mod", 'OC_Obs_Candid', "IOC_Obs"]]
+data_test = data[test_mask][['data_prev', 'Tx_Mod', 'P90cl_Tx_Mod', 'Tx_Obs',
+                             'P90cl_Tx_Obs', 'OC_Mod_Candid', "IOC_Mod", 'OC_Obs_Candid', "IOC_Obs"]]
 print(len(data_train), len(data_test))
-
-# Save the training and testing datasets to CSV
-data_train.to_csv('1.2-DATA-TRAIN-ORIGINAL.csv', index=False)
-data_test.to_csv('1.3-DATA-TEST-ORIGINAL.csv', index=False)
 
 # Fix the unbalanced train dataset using SMOTE (synthetic minority oversampling)
 features_for_balance = data_train.drop(columns=['IOC_Obs_'])

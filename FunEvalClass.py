@@ -12,6 +12,25 @@ if not os.path.exists(DIR_RESULTS):
     os.makedirs(DIR_RESULTS)
 
 
+def count_classes(y_list):
+    # y_list = y_train; class_labels = [0, 1]
+    """Count the occurrence of each class in a list and return a dictionary with class labels as keys and their counts as values.
+
+    Parameters:
+    - y_list: list of class labels (e.g., [0, 1, 0, 1, 1])
+
+    Returns:
+    - class_counts: dictionary with class labels as keys and their counts as values (e.g., {0: 2, 1: 3})
+    """
+    class_counts = {}
+    for label in y_list:
+        if int(label) in class_counts:
+            class_counts[int(label)] += 1
+        else:
+            class_counts[int(label)] = 1
+    return class_counts
+
+
 def eval_confusion_matrix(y_test, y_pred, cmap, classifier_name, classifier_acronym, v, show_res=True):
     # y_pred=rf_pred; cmap='Blues'; classifier_name="Random Forest"; classifier_acronym="RF"; show_res=True
     """
@@ -42,7 +61,7 @@ def eval_confusion_matrix(y_test, y_pred, cmap, classifier_name, classifier_acro
         display_labels=['No IOC', 'IOC'],
         cmap=cmap, ax=ax, values_format='d', text_kw={'fontsize': 30})
     cm.ax_.set_title(
-        f'Confusion Matrix - {classifier_name} - v{v}', fontsize=20, fontweight='bold')
+        f'Confusion Matrix - {classifier_name}', fontsize=20, fontweight='bold')
     cm.ax_.tick_params(axis='both', which='major',
                        labelsize=20)  # tick label size
     cm.ax_.set_xlabel(cm.ax_.get_xlabel(), fontsize=20)  # x-axis label size
@@ -50,7 +69,7 @@ def eval_confusion_matrix(y_test, y_pred, cmap, classifier_name, classifier_acro
 
     plt.tight_layout()
     plt.savefig(
-        os.path.join(DIR_RESULTS, f'{classifier_acronym}-Confusion_Matrix_{v}.png'), dpi=300)
+        os.path.join(DIR_RESULTS, f'v_{v}', f'{classifier_acronym}-Confusion_Matrix.png'), dpi=300)
     if show_res:
         plt.show()
     plt.close("all")
@@ -59,7 +78,7 @@ def eval_confusion_matrix(y_test, y_pred, cmap, classifier_name, classifier_acro
     # Feed the Confusion Matrix as table to a result text file
     # --------------------------------------------------------------
     res_text = "-" * LINE_LEN + "\n"
-    res_text += f"CONFUSION MATRIX - {classifier_name} - v{v}\n"
+    res_text += f"CONFUSION MATRIX - {classifier_name}\n"
     res_text += "-" * LINE_LEN + "\n"
     res_text += pd.DataFrame(cm.confusion_matrix, index=['Actual No IOC', 'Actual IOC'], columns=[
         'Predicted No IOC', 'Predicted IOC']).to_string() + "\n"
@@ -73,12 +92,12 @@ def eval_confusion_matrix(y_test, y_pred, cmap, classifier_name, classifier_acro
     res_text += "-" * LINE_LEN + "\n"
 
     # Feed the Classification Report to the result text file
-    res_text += f"CLASSIFICATION REPORT - {classifier_name} - v{v}\n"
+    res_text += f"CLASSIFICATION REPORT - {classifier_name}\n"
     res_text += "-" * LINE_LEN + "\n"
     res_text += classification_report(y_test, y_pred)
     res_text += "-" * LINE_LEN + "\n"
 
-    with open(os.path.join(DIR_RESULTS, f"{classifier_acronym}-Confusion_Matrix_Results_{v}.txt"), "w", encoding="utf-8") as f:
+    with open(os.path.join(DIR_RESULTS, f'v_{v}', f'{classifier_acronym}-Confusion_Matrix_Results.txt'), "w", encoding="utf-8") as f:
         print(res_text, file=f)
 
     if show_res:
@@ -118,7 +137,7 @@ def eval_metrics(y_test, y_pred, classifier_name, classifier_acronym, v, show_re
     # Feed the Model Evaluation Summary to the result text file
     # --------------------------------------------------------------
     res_text = "-" * LINE_LEN + "\n"
-    res_text += f"MODEL EVALUATION SUMMARY - {classifier_name} - v{v}\n"
+    res_text += f"MODEL EVALUATION SUMMARY - {classifier_name}\n"
     res_text += "-" * LINE_LEN + "\n"
     res_text += f"Accuracy:  {res_accuracy:.3f}\n"
     res_text += f"Precision: {res_precision:.3f}\n"
@@ -127,7 +146,7 @@ def eval_metrics(y_test, y_pred, classifier_name, classifier_acronym, v, show_re
     res_text += "-" * LINE_LEN + "\n"
 
     # Feed the Interpretation to the result text file
-    res_text += f"INTERPRETATION - {classifier_name} - v{v}\n"
+    res_text += f"INTERPRETATION - {classifier_name}\n"
     res_text += "-" * LINE_LEN + "\n"
     res_text += f"  • Model correctly identifies {res_accuracy*100:.1f}% of cases\n"
     res_text += f"  • When predicting IOC, correct {res_precision*100:.1f}% of the time\n"
@@ -135,7 +154,7 @@ def eval_metrics(y_test, y_pred, classifier_name, classifier_acronym, v, show_re
     res_text += f"  • Overall balance: F1-Score = {res_f1_score:.3f}\n"
     res_text += "-" * LINE_LEN + "\n"
 
-    with open(os.path.join(DIR_RESULTS, f"{classifier_acronym}-Metrics_Results_{v}.txt"), "w", encoding="utf-8") as f:
+    with open(os.path.join(DIR_RESULTS, f'v_{v}', f'{classifier_acronym}-Metrics_Results.txt'), "w", encoding="utf-8") as f:
         print(res_text, file=f)
 
     if show_res:
@@ -180,30 +199,36 @@ def eval_feature_importance(classifier, X_columns, classifier_name, classifier_a
     plt.xlabel('Importance', fontsize=20)
     plt.ylabel('Feature', fontsize=20)
     plt.title(
-        f'FEATURE IMPORTANCE - {classifier_name} - v{v}', fontsize=20, fontweight='bold')
+        f'FEATURE IMPORTANCE - {classifier_name}', fontsize=20, fontweight='bold')
     plt.tight_layout()
     plt.savefig(
         # Append a date and time stamp to the filename
-        os.path.join(DIR_RESULTS, f'{classifier_acronym}-Feature_Importance_{v}.png'), dpi=300)
+        os.path.join(DIR_RESULTS, f'v_{v}', f'{classifier_acronym}-Feature_Importance.png'), dpi=300)
     if show_res:
         plt.show()
     plt.close("all")
 
     # Save the feature importance to CSV
     feature_importance_df.to_csv(
-        os.path.join(DIR_RESULTS, f'{classifier_acronym}-Feature_Importance_{v}.csv'), index=False)
+        os.path.join(DIR_RESULTS, f'v_{v}', f'{classifier_acronym}-Feature_Importance.csv'), index=False)
 
     return feature_importance_df
 
 
 def eval_mlp_feature_importance(mlp_classifier, X_test_scaled, y_test, X, v, show_res=True):
     """
-    Docstring for plot_mlp_feature_importance
+    Calculate and plot permutation feature importance for MLP classifier.
 
-    :param mlp_classifier: MLP classifier object
-    :param X_test_scaled: Scaled test features
-    :param y_test: True labels for the test set
-    :param X: Original feature set
+    Parameters:
+    - mlp_classifier: trained MLP classifier object
+    - X_test_scaled: Scaled test features
+    - y_test: True labels for the test set
+    - X: Original feature set (for column names)
+    - v: version or identifier for saving results
+    - show_res: whether to display the plot and print results
+
+    Returns:
+    - DataFrame with feature importance
     """
 
     perm_importance = permutation_importance(
@@ -216,20 +241,41 @@ def eval_mlp_feature_importance(mlp_classifier, X_test_scaled, y_test, X, v, sho
 
     perm_importance_df = perm_importance_df.sort_values(
         by='Importance', ascending=False)
-    plt.figure(figsize=(10, 6))
+
+    # Feed the Feature Importance to the result text file
+    res_text = "-" * LINE_LEN + "\n"
+    res_text += "FEATURE IMPORTANCE - MLP Neural Network Classifier\n"
+    res_text += "-" * LINE_LEN + "\n"
+    res_text += perm_importance_df.to_string(index=False) + "\n"
+    res_text += "-" * LINE_LEN + "\n"
+
+    with open(os.path.join(DIR_RESULTS, f'v_{v}', f'MLP-Feature_Importance_Results.txt'), "w", encoding="utf-8") as f:
+        print(res_text, file=f)
+
+    if show_res:
+        print(res_text)
+
+    # Plot feature importance
+    plt.close('all')
+    fig = plt.figure(figsize=(10, 6))
     bp = sns.barplot(x='Importance', y='Feature',
                      data=perm_importance_df, color='salmon')
     plt.xlabel('Importance', fontsize=20)
     plt.ylabel('Feature', fontsize=20)
     plt.title(
-        f'FEATURE IMPORTANCE - MLP Neural Network Classifier - v{v}', fontsize=20, fontweight='bold')
+        f'FEATURE IMPORTANCE - MLP Neural Network Classifier', fontsize=20, fontweight='bold')
     plt.tight_layout()
     plt.savefig(
-        # Append a date and time stamp to the filename
-        os.path.join(DIR_RESULTS, f'MLP-Feature_Importance_{v}.png'), dpi=300)
+        os.path.join(DIR_RESULTS, f'v_{v}', f'MLP-Feature_Importance.png'), dpi=300)
     if show_res:
         plt.show()
     plt.close("all")
+
+    # Save the feature importance to CSV
+    perm_importance_df.to_csv(
+        os.path.join(DIR_RESULTS, f'v_{v}', f'MLP-Feature_Importance.csv'), index=False)
+
+    return perm_importance_df
 
 
 def plot_mlp_training_history(mlp_classifier, v, show_res=True):
@@ -248,7 +294,7 @@ def plot_mlp_training_history(mlp_classifier, v, show_res=True):
     plt.close("all")
     fig, ax = plt.subplots(figsize=(10, 6))
     ax.plot(mlp_classifier.loss_curve_, label='Training Loss', linewidth=2)
-    ax.set_title(f'MLP NN Training Loss Over Iterations - v{v}',
+    ax.set_title(f'MLP NN Training Loss Over Iterations',
                  fontsize=20, fontweight='bold')
     ax.set_ylabel('Loss', fontsize=20)
     ax.set_xlabel('Iteration', fontsize=20)
@@ -257,7 +303,7 @@ def plot_mlp_training_history(mlp_classifier, v, show_res=True):
     plt.tight_layout()
     plt.savefig(
         # Append a date and time stamp to the filename
-        os.path.join(DIR_RESULTS, f'MLP-Training_History_{v}.png'), dpi=300)
+        os.path.join(DIR_RESULTS, f'v_{v}', f'MLP-Training_History.png'), dpi=300)
     if show_res:
         plt.show()
     plt.close("all")

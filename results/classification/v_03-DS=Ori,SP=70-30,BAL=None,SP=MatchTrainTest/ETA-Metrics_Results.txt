@@ -1,0 +1,16 @@
+-------------------------------------------------------
+MODEL EVALUATION SUMMARY - Baseline Model (eta)
+-------------------------------------------------------
+Accuracy:  0.765
+Precision: 0.250
+Recall:    0.143
+F1-Score:  0.182
+-------------------------------------------------------
+INTERPRETATION - Baseline Model (eta)
+-------------------------------------------------------
+  • Model correctly identifies 76.5% of cases
+  • When predicting IOC, correct 25.0% of the time
+  • Catches 14.3% of actual IOC events (sensitivity)
+  • Overall balance: F1-Score = 0.182
+-------------------------------------------------------
+

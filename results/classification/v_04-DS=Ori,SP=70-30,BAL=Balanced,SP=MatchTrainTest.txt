@@ -1,0 +1,9 @@
+Test the automatic balance and split in the original dataset.
+DS  (DATA SOURCE) = Ori: Original DS 383 rows balanced.
+SP  (SPLIT)       = 70-30: Automatic split of 70% training and 30% testing.
+BAL (BALANCE)     = Balanced .
+SP  (SEM_PREV)    = MATCH: Rows in training set was removed where sem_prev is not in the test set sem_prev values,
+                           to ensure the model learns from the same temporal distribution as the test set.
+
+* Predictors: ['sem_prev', 'tsfc', 'magv', 'ur2m', 'Tx_Mod', 'P90cl_Tx_Mod', 'P90cl_Tx_Obs', 'Cl_Tx_Mod', 'Cl_Tx_Obs', 'OC_Mod_Candid', 'IOC_Mod']
+* Target: OC_Obs_Candid

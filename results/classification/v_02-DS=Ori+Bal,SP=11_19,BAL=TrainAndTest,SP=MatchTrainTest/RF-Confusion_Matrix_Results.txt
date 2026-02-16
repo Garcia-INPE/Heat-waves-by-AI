@@ -1,0 +1,24 @@
+-------------------------------------------------------
+CONFUSION MATRIX - Random Forest Classifier
+-------------------------------------------------------
+               Predicted No IOC  Predicted IOC
+Actual No IOC                 0              0
+Actual IOC                   43             12
+-------------------------------------------------------
+  • TN:    0 - Correctly identified non-IOC cases
+  • FP:    0 - Incorrectly predicted as IOC
+  • FN:   43 - Missed IOC events
+  • TP:   12 - Correctly identified IOC events
+-------------------------------------------------------
+CLASSIFICATION REPORT - Random Forest Classifier
+-------------------------------------------------------
+              precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00         0
+           1       1.00      0.22      0.36        55
+
+    accuracy                           0.22        55
+   macro avg       0.50      0.11      0.18        55
+weighted avg       1.00      0.22      0.36        55
+-------------------------------------------------------
+

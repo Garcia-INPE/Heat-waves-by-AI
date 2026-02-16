@@ -1,0 +1,11 @@
+Simulate a real-world scenario and make predictions for the exact period in which the event occurred.
+DS  (DATA SOURCE) = ORI..: Original DS 383 rows
+SP  (SPLIT)       = 11_19: Manual, days 11 to 19 Nov 2023 testing (12 rows with IOC_Obs=1) and the rest for training
+                           (371, 361 IOC_Obs=0 + 10 IOC_Obs=1).
+BAL (BALANCE)     = UNBAL: Originally unbalanced, 361 IOC_Obs=0 + 10 IOC_Obs=1 in training set, 12 IOC_Obs=1 in test set.
+DP  (DIA_PREV)    = DEL..: Deleted due to sem_prev is more granular than dia_prev and can capture more temporal patterns.
+SP  (SEM_PREV)    = MATCH: Rows in training set was removed where sem_prev is not in the test set sem_prev values,
+                           to ensure the model learns from the same temporal distribution as the test set.
+
+* Predictors: ['sem_prev', 'tsfc', 'magv', 'ur2m', 'Tx_Mod', 'P90cl_Tx_Mod', 'P90cl_Tx_Obs', 'Cl_Tx_Mod', 'Cl_Tx_Obs', 'OC_Mod_Candid', 'IOC_Mod']
+* Target: OC_Obs_Candid

@@ -1,0 +1,24 @@
+-------------------------------------------------------
+CONFUSION MATRIX - MLP Neural Network Classifier
+-------------------------------------------------------
+               Predicted No IOC  Predicted IOC
+Actual No IOC                94              0
+Actual IOC                   21              0
+-------------------------------------------------------
+  • TN:   94 - Correctly identified non-IOC cases
+  • FP:    0 - Incorrectly predicted as IOC
+  • FN:   21 - Missed IOC events
+  • TP:    0 - Correctly identified IOC events
+-------------------------------------------------------
+CLASSIFICATION REPORT - MLP Neural Network Classifier
+-------------------------------------------------------
+              precision    recall  f1-score   support
+
+           0       0.82      1.00      0.90        94
+           1       0.00      0.00      0.00        21
+
+    accuracy                           0.82       115
+   macro avg       0.41      0.50      0.45       115
+weighted avg       0.67      0.82      0.74       115
+-------------------------------------------------------
+

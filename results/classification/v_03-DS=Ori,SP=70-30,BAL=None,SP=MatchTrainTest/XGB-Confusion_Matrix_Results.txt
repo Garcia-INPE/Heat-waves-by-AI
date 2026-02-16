@@ -1,0 +1,24 @@
+-------------------------------------------------------
+CONFUSION MATRIX - XGBoost Classifier
+-------------------------------------------------------
+               Predicted No IOC  Predicted IOC
+Actual No IOC                88              6
+Actual IOC                   19              2
+-------------------------------------------------------
+  • TN:   88 - Correctly identified non-IOC cases
+  • FP:    6 - Incorrectly predicted as IOC
+  • FN:   19 - Missed IOC events
+  • TP:    2 - Correctly identified IOC events
+-------------------------------------------------------
+CLASSIFICATION REPORT - XGBoost Classifier
+-------------------------------------------------------
+              precision    recall  f1-score   support
+
+           0       0.82      0.94      0.88        94
+           1       0.25      0.10      0.14        21
+
+    accuracy                           0.78       115
+   macro avg       0.54      0.52      0.51       115
+weighted avg       0.72      0.78      0.74       115
+-------------------------------------------------------
+

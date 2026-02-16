@@ -1,0 +1,24 @@
+-------------------------------------------------------
+CONFUSION MATRIX - Baseline Model (eta)
+-------------------------------------------------------
+               Predicted No IOC  Predicted IOC
+Actual No IOC                85              9
+Actual IOC                   18              3
+-------------------------------------------------------
+  • TN:   85 - Correctly identified non-IOC cases
+  • FP:    9 - Incorrectly predicted as IOC
+  • FN:   18 - Missed IOC events
+  • TP:    3 - Correctly identified IOC events
+-------------------------------------------------------
+CLASSIFICATION REPORT - Baseline Model (eta)
+-------------------------------------------------------
+              precision    recall  f1-score   support
+
+           0       0.83      0.90      0.86        94
+           1       0.25      0.14      0.18        21
+
+    accuracy                           0.77       115
+   macro avg       0.54      0.52      0.52       115
+weighted avg       0.72      0.77      0.74       115
+-------------------------------------------------------
+

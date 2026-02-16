@@ -1,0 +1,14 @@
+
+============================================================
+MODEL COMPARISON: IOC_Mod vs RF vs XGB vs MLP
+------------------------------------------------------------
+Metric            IOC_Mod        RF       XGB       MLP
+Accuracy            12.73%    21.82%    21.82%    41.82%
+Precision          1.0000    1.0000    1.0000    1.0000
+Recall             0.1273    0.2182    0.2182    0.4182
+F1-Score           0.2258    0.3582    0.3582    0.5897
+============================================================
+- Accuracy: The proportion of correct predictions (both true positives and true negatives) out of all predictions. Care if imbalanced DS.
+- Precision: The proportion of true positives out of all positive predictions. How many of the predicted positive cases were actually positive.
+- Recall: The proportion of true positives out of all actual positives. How many of the actual positive cases were correctly identified by the model.
+- F1-Score: The harmonic mean of precision and recall. It provides a single metric that balances both precision and recall. More useful DS is imbalanced.

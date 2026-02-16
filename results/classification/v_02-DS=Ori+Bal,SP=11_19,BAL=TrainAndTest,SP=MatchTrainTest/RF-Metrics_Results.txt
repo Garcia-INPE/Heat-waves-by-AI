@@ -1,0 +1,16 @@
+-------------------------------------------------------
+MODEL EVALUATION SUMMARY - Random Forest Classifier
+-------------------------------------------------------
+Accuracy:  0.218
+Precision: 1.000
+Recall:    0.218
+F1-Score:  0.358
+-------------------------------------------------------
+INTERPRETATION - Random Forest Classifier
+-------------------------------------------------------
+  • Model correctly identifies 21.8% of cases
+  • When predicting IOC, correct 100.0% of the time
+  • Catches 21.8% of actual IOC events (sensitivity)
+  • Overall balance: F1-Score = 0.358
+-------------------------------------------------------
+

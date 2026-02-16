@@ -1,0 +1,16 @@
+-------------------------------------------------------
+MODEL EVALUATION SUMMARY - MLP Neural Network Classifier
+-------------------------------------------------------
+Accuracy:  0.418
+Precision: 1.000
+Recall:    0.418
+F1-Score:  0.590
+-------------------------------------------------------
+INTERPRETATION - MLP Neural Network Classifier
+-------------------------------------------------------
+  • Model correctly identifies 41.8% of cases
+  • When predicting IOC, correct 100.0% of the time
+  • Catches 41.8% of actual IOC events (sensitivity)
+  • Overall balance: F1-Score = 0.590
+-------------------------------------------------------
+
