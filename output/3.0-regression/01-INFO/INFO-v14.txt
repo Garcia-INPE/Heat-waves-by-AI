@@ -1,0 +1,19 @@
+=======================================================
+v14: PRED=AD HOC + SPL=70_30 + BAL=No + SEM=No
+=======================================================
+PRED...........: Predictors selected based on domain knowledge
+SPLIT..........: Automatic split of 70% training and 30% testing.
+BALANCE........: Use the original unbalanced dataset.
+MATCH SEM PREV.: Do not filter X_train based on sem_prev values in the test set.
+-------------------------------------------------------
+* BALANCE: Yes! Dataset balanced using SMOTE. From {0: 318, 1: 65} to {0: 318, 1: 318}
+* PREDICTORS: ['sem_prev', 'tsfc', 'magv', 'ur2m', 'Tx_Mod', 'P90cl_Tx_Mod', 'P90cl_Tx_Obs', 'Cl_Tx_Mod', 'Cl_Tx_Obs']
+* SPLITING THE FULL DATASET INTO TRAINING AND TESTING SETS: 445 rows for training (70.0%) and 191 rows for testing (30.0%).
+  - The training set balance is now {1: 223, 0: 222} and testing set is {0: 96, 1: 95}.
+* SEM_PREV MATCH: No! Training set not filtered based on sem_prev values in the test set.
+* TRAINING AND EVALUATION: 
+-------------------------------------------------------
+  Eta -> MAE: 3.5233 | RMSE: 4.3466 | CORR: 0.0630
+   RF -> MAE: 1.8020 | RMSE: 2.4089 | CORR: 0.7013
+  XGB -> MAE: 1.9074 | RMSE: 2.5494 | CORR: 0.6532
+   NN -> MAE: 1.9361 | RMSE: 2.7321 | CORR: 0.6377

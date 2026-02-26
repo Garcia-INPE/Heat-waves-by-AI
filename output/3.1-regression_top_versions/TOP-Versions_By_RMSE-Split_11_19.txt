@@ -1,0 +1,12 @@
+Top 10 Individual Versions (split=11_19, ranked by best RMSE, then MAE, then CORR)
+======================================================================================================================================================
+ 1. v01 | MODEL=Eta | RMSE=3.6116 | MAE=3.2648 | CORR=0.6466 | SPL=11_19 | PRED=ALL          | BAL=No  | SEM=Yes
+ 2. v02 | MODEL=Eta | RMSE=3.6116 | MAE=3.2648 | CORR=0.6466 | SPL=11_19 | PRED=ALL          | BAL=No  | SEM=No
+ 3. v09 | MODEL=Eta | RMSE=3.6116 | MAE=3.2648 | CORR=0.6466 | SPL=11_19 | PRED=AD HOC       | BAL=No  | SEM=Yes
+ 4. v10 | MODEL=Eta | RMSE=3.6116 | MAE=3.2648 | CORR=0.6466 | SPL=11_19 | PRED=AD HOC       | BAL=No  | SEM=No
+ 5. v17 | MODEL=Eta | RMSE=3.6116 | MAE=3.2648 | CORR=0.6466 | SPL=11_19 | PRED=POSIT_CORR   | BAL=No  | SEM=Yes
+ 6. v18 | MODEL=Eta | RMSE=3.6116 | MAE=3.2648 | CORR=0.6466 | SPL=11_19 | PRED=POSIT_CORR   | BAL=No  | SEM=No
+ 7. v25 | MODEL=Eta | RMSE=3.6116 | MAE=3.2648 | CORR=0.6466 | SPL=11_19 | PRED=POSIT_CORR+SEM_PREV | BAL=No  | SEM=Yes
+ 8. v26 | MODEL=Eta | RMSE=3.6116 | MAE=3.2648 | CORR=0.6466 | SPL=11_19 | PRED=POSIT_CORR+SEM_PREV | BAL=No  | SEM=No
+ 9. v03 | MODEL=Eta | RMSE=3.7709 | MAE=3.4276 | CORR=0.5237 | SPL=11_19 | PRED=ALL          | BAL=Yes | SEM=Yes
+10. v04 | MODEL=Eta | RMSE=3.7709 | MAE=3.4276 | CORR=0.5237 | SPL=11_19 | PRED=ALL          | BAL=Yes | SEM=No

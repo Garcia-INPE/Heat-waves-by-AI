@@ -1,0 +1,12 @@
+Top 10 Individual Versions (ranked by best RMSE, then MAE, then CORR)
+======================================================================================================================================================
+ 1. v05 | MODEL=RF  | RMSE=2.3744 | MAE=1.7719 | CORR=0.7125 | SPL=70_30 | PRED=ALL          | BAL=No  | SEM=Yes
+ 2. v06 | MODEL=RF  | RMSE=2.3744 | MAE=1.7719 | CORR=0.7125 | SPL=70_30 | PRED=ALL          | BAL=No  | SEM=No
+ 3. v07 | MODEL=RF  | RMSE=2.3744 | MAE=1.7719 | CORR=0.7125 | SPL=70_30 | PRED=ALL          | BAL=Yes | SEM=Yes
+ 4. v08 | MODEL=RF  | RMSE=2.3744 | MAE=1.7719 | CORR=0.7125 | SPL=70_30 | PRED=ALL          | BAL=Yes | SEM=No
+ 5. v13 | MODEL=RF  | RMSE=2.4089 | MAE=1.8020 | CORR=0.7013 | SPL=70_30 | PRED=AD HOC       | BAL=No  | SEM=Yes
+ 6. v14 | MODEL=RF  | RMSE=2.4089 | MAE=1.8020 | CORR=0.7013 | SPL=70_30 | PRED=AD HOC       | BAL=No  | SEM=No
+ 7. v15 | MODEL=RF  | RMSE=2.4089 | MAE=1.8020 | CORR=0.7013 | SPL=70_30 | PRED=AD HOC       | BAL=Yes | SEM=Yes
+ 8. v16 | MODEL=RF  | RMSE=2.4089 | MAE=1.8020 | CORR=0.7013 | SPL=70_30 | PRED=AD HOC       | BAL=Yes | SEM=No
+ 9. v29 | MODEL=RF  | RMSE=2.5249 | MAE=1.9418 | CORR=0.6615 | SPL=70_30 | PRED=POSIT_CORR+SEM_PREV | BAL=No  | SEM=Yes
+10. v30 | MODEL=RF  | RMSE=2.5249 | MAE=1.9418 | CORR=0.6615 | SPL=70_30 | PRED=POSIT_CORR+SEM_PREV | BAL=No  | SEM=No

@@ -1,0 +1,19 @@
+=======================================================
+v09: PRED=AD HOC + SPL=11_19 + BAL=No + SEM=Yes
+=======================================================
+PRED...........: Predictors selected based on domain knowledge
+SPLIT..........: Manual split, days 11 to 19 Nov 2023 testing (12 rows with IOC_Obs=1) and the rest for training (371, 361 IOC_Obs=0 + 10 IOC_Obs=1).
+BALANCE........: Use the original unbalanced dataset.
+MATCH SEM PREV.: Remove from X_train all rows where sem_prev is not in the X_test sem_prev values, to ensure the model learns from the same temporal distribution as the test set.
+-------------------------------------------------------
+* BALANCE: No. Dataset remains unbalanced with {0: 318, 1: 65}
+* PREDICTORS: ['sem_prev', 'tsfc', 'magv', 'ur2m', 'Tx_Mod', 'P90cl_Tx_Mod', 'P90cl_Tx_Obs', 'Cl_Tx_Mod', 'Cl_Tx_Obs']
+* SPLITING THE FULL DATASET INTO TRAINING AND TESTING SETS: 371 rows for training (96.9%) and 12 rows for testing (3.1%).
+  - The training set balance is now {0: 316, 1: 55} and testing set is {0: 2, 1: 10}.
+* SEM_PREV MATCH: No! Training set not filtered based on sem_prev values in the test set.
+* TRAINING AND EVALUATION: 
+-------------------------------------------------------
+  Eta -> MAE: 3.2648 | RMSE: 3.6116 | CORR: 0.6466
+   RF -> MAE: 6.2667 | RMSE: 6.6983 | CORR: -0.4775
+  XGB -> MAE: 6.6736 | RMSE: 7.1135 | CORR: -0.2377
+   NN -> MAE: 5.4043 | RMSE: 6.0468 | CORR: -0.2395

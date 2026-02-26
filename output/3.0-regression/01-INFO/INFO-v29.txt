@@ -1,0 +1,19 @@
+=======================================================
+v29: PRED=POSIT_CORR+SEM_PREV + SPL=70_30 + BAL=No + SEM=Yes
+=======================================================
+PRED...........: Predictors with positive correlation to Tx_Obs + SEM_PREV
+SPLIT..........: Automatic split of 70% training and 30% testing.
+BALANCE........: Use the original unbalanced dataset.
+MATCH SEM PREV.: Remove from X_train all rows where sem_prev is not in the X_test sem_prev values, to ensure the model learns from the same temporal distribution as the test set.
+-------------------------------------------------------
+* BALANCE: Yes! Dataset balanced using SMOTE. From {0: 318, 1: 65} to {0: 318, 1: 318}
+* PREDICTORS: ['Cl_Tx_Obs', 'P90cl_Tx_Obs', 'magv', 'tsfc', 'sem_prev']
+* SPLITING THE FULL DATASET INTO TRAINING AND TESTING SETS: 445 rows for training (70.0%) and 191 rows for testing (30.0%).
+  - The training set balance is now {1: 223, 0: 222} and testing set is {0: 96, 1: 95}.
+* SEM_PREV MATCH: No! Training set not filtered based on sem_prev values in the test set.
+* TRAINING AND EVALUATION: 
+-------------------------------------------------------
+  Eta -> MAE: 3.5233 | RMSE: 4.3466 | CORR: 0.0630
+   RF -> MAE: 1.9418 | RMSE: 2.5249 | CORR: 0.6615
+  XGB -> MAE: 1.9393 | RMSE: 2.5490 | CORR: 0.6552
+   NN -> MAE: 2.2154 | RMSE: 2.8525 | CORR: 0.5408

@@ -1,0 +1,1 @@
+conda install pandas matplotlib seaborn xgboost imbalanced-learn scikit-learn -y

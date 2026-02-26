@@ -1,0 +1,19 @@
+=======================================================
+v03: PRED=ALL + SPL=11_19 + BAL=Yes + SEM=Yes
+=======================================================
+PRED...........: All predictors
+SPLIT..........: Manual split, days 11 to 19 Nov 2023 testing (12 rows with IOC_Obs=1) and the rest for training (371, 361 IOC_Obs=0 + 10 IOC_Obs=1).
+BALANCE........: Balance the dataset (force IOC_Obs=1 equals to IOC_Obs=0)
+MATCH SEM PREV.: Remove from X_train all rows where sem_prev is not in the X_test sem_prev values, to ensure the model learns from the same temporal distribution as the test set.
+-------------------------------------------------------
+* BALANCE: Yes! Dataset balanced using SMOTE. From {0: 318, 1: 65} to {0: 318, 1: 318}
+* PREDICTORS: ['dia_prev', 'sem_prev', 'tsfc', 'magv', 'ur2m', 'Tx_Mod', 'P90cl_Tx_Mod', 'P90cl_Tx_Obs', 'Cl_Tx_Mod', 'Cl_Tx_Obs', 'OC_Mod_Candid', 'IOC_Mod']
+* SPLITING THE FULL DATASET INTO TRAINING AND TESTING SETS: 579 rows for training (91.0%) and 57 rows for testing (9.0%).
+  - The training set balance is now {0: 316, 1: 263} and testing set is {0: 2, 1: 55}.
+* SEM_PREV MATCH: No! Training set not filtered based on sem_prev values in the test set.
+* TRAINING AND EVALUATION: 
+-------------------------------------------------------
+  Eta -> MAE: 3.4276 | RMSE: 3.7709 | CORR: 0.5237
+   RF -> MAE: 5.8876 | RMSE: 6.2132 | CORR: -0.2575
+  XGB -> MAE: 5.9547 | RMSE: 6.4143 | CORR: -0.2418
+   NN -> MAE: 4.5105 | RMSE: 5.2954 | CORR: -0.3150

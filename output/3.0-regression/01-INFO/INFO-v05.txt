@@ -1,0 +1,19 @@
+=======================================================
+v05: PRED=ALL + SPL=70_30 + BAL=No + SEM=Yes
+=======================================================
+PRED...........: All predictors
+SPLIT..........: Automatic split of 70% training and 30% testing.
+BALANCE........: Use the original unbalanced dataset.
+MATCH SEM PREV.: Remove from X_train all rows where sem_prev is not in the X_test sem_prev values, to ensure the model learns from the same temporal distribution as the test set.
+-------------------------------------------------------
+* BALANCE: Yes! Dataset balanced using SMOTE. From {0: 318, 1: 65} to {0: 318, 1: 318}
+* PREDICTORS: ['dia_prev', 'sem_prev', 'tsfc', 'magv', 'ur2m', 'Tx_Mod', 'P90cl_Tx_Mod', 'P90cl_Tx_Obs', 'Cl_Tx_Mod', 'Cl_Tx_Obs', 'OC_Mod_Candid', 'IOC_Mod']
+* SPLITING THE FULL DATASET INTO TRAINING AND TESTING SETS: 445 rows for training (70.0%) and 191 rows for testing (30.0%).
+  - The training set balance is now {1: 223, 0: 222} and testing set is {0: 96, 1: 95}.
+* SEM_PREV MATCH: No! Training set not filtered based on sem_prev values in the test set.
+* TRAINING AND EVALUATION: 
+-------------------------------------------------------
+  Eta -> MAE: 3.5233 | RMSE: 4.3466 | CORR: 0.0630
+   RF -> MAE: 1.7719 | RMSE: 2.3744 | CORR: 0.7125
+  XGB -> MAE: 1.8581 | RMSE: 2.5317 | CORR: 0.6607
+   NN -> MAE: 2.0290 | RMSE: 3.0020 | CORR: 0.6123
